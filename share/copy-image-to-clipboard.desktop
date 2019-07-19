@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Copy image to clipboard
+GenericName=Image viewer
+Comment=Copy image to clipboard
+Exec=perl -MMIME::Types -e '$f=shift;$t=MIME::Types->new()->mimeTypeOf($f);exec qw/xclip -selection clipboard -t/,$t,"-i",$f if $t and -e $f' %f
+Terminal=false
+Categories=Graphics;
+MimeType=image/bmp;image/gif;image/jpeg;image/png;
+NoDisplay=false
+Icon=edit-copy

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Copy image to clipboard
+GenericName=Image viewer
+Comment=Copy image to clipboard
+Exec=img2clip %f
+Terminal=false
+Categories=Graphics;
+MimeType=image/bmp;image/gif;image/jpeg;image/png;
+NoDisplay=false
+Icon=edit-copy
