@@ -1,3 +1,36 @@
-#!/bin/sh
+#!/usr/bin/perl
+#
+# perl -MMIME::Types -e '$t=MIME::Types->new->mimeTypeOf($f=shift);exec qw/xclip -selection clipboard -t/,$t,"-i",$f if $t and -e $f' %f
 
-xclip -selection clipboard -t $(file -b --mime-type $1) -i $1
+use strict;
+use utf8;
+use MIME::Types;
+
+sub get_mime_type {
+    return MIME::Types
+        ->new
+        ->mimeTypeOf(shift);
+}
+
+sub help {
+    print <<"_EOH_";
+img2clip - Copy image to the X clipboard
+Dependecies: perl, MIME::Types, xclip
+Usage:
+    img2clip [FILE]
+_EOH_
+}
+
+sub main {
+    my $file = shift;
+
+    help and return 0 unless $file;
+
+    my $mtype = get_mime_type($file);
+
+    die "Unknown mime-type of file '$file'\n" unless ($mtype);
+
+    exec qw/xclip -selection clipbord -target/, $mtype, '-in' => $file;
+}
+
+exit main(@ARGV);

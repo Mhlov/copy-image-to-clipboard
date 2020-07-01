@@ -22,13 +22,13 @@ help: help
 	@echo "\tmake install2 | link2 | uninstall2"
 
 
-install1: copy1 update-desktop-db
+install1: make-dir copy1 update-desktop-db
 
-install2: copy2 update-desktop-db
+install2: make-dir copy2 update-desktop-db
 
-link1: symlink1 update-desktop-db
+link1: make-dir symlink1 update-desktop-db
 
-link2: symlink2 update-desktop-db
+link2: make-dir symlink2 update-desktop-db
 
 uninstall1: delete1 update-desktop-db
 
@@ -71,4 +71,7 @@ delete2:
 update-desktop-db:
 	@update-desktop-database ${TARGET_DESKTOP_DIR}
 
+
+make-dir:
+	mkdir -p "${TARGET_DESKTOP_DIR}"
 
